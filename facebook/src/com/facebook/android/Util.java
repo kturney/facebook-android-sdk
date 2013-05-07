@@ -19,6 +19,8 @@ package com.facebook.android;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.os.Bundle;
+
+import com.facebook.Client;
 import com.facebook.internal.Utility;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -163,8 +165,7 @@ public final class Util {
             url = url + "?" + encodeUrl(params);
         }
         Utility.logd("Facebook-Util", method + " URL: " + url);
-        HttpURLConnection conn =
-            (HttpURLConnection) new URL(url).openConnection();
+        HttpURLConnection conn = Client.INST.open(new URL(url));
         conn.setRequestProperty("User-Agent", System.getProperties().
                 getProperty("http.agent") + " FacebookAndroidSDK");
         if (!method.equals("GET")) {

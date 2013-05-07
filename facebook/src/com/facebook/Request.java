@@ -1259,8 +1259,7 @@ public class Request {
     }
 
     static HttpURLConnection createConnection(URL url) throws IOException {
-        HttpURLConnection connection;
-        connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = Client.INST.open(url);
 
         connection.setRequestProperty(USER_AGENT_HEADER, getUserAgent());
         connection.setRequestProperty(CONTENT_TYPE_HEADER, getMimeContentType());

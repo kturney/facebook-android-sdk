@@ -20,6 +20,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
+
+import com.facebook.Client;
 import com.facebook.FacebookException;
 import com.facebook.internal.Utility;
 
@@ -203,7 +205,7 @@ class ImageDownloader {
         boolean issueResponse = true;
 
         try {
-            connection = (HttpURLConnection) key.url.openConnection();
+            connection = Client.INST.open(key.url);
             connection.setInstanceFollowRedirects(false);
 
             switch (connection.getResponseCode()) {

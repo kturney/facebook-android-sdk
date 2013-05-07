@@ -22,6 +22,8 @@ import android.graphics.BitmapFactory;
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.LargeTest;
 import android.test.suitebuilder.annotation.MediumTest;
+
+import com.facebook.Client;
 import com.facebook.internal.Utility;
 import com.facebook.widget.ImageResponseCache;
 
@@ -68,7 +70,7 @@ public final class ImageResponseCacheTests extends AndroidTestCase {
             // Read the image
             istream = ImageResponseCache.getCachedImageStream(url, safeGetContext());
             if (istream == null) {
-                HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+                HttpURLConnection connection = Client.INST.open(url);
                 istream = ImageResponseCache.interceptAndCacheImageStream(safeGetContext(), connection);
             }
             assertTrue(istream != null);
